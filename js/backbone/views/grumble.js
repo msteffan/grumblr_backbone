@@ -6,12 +6,13 @@ App.Views.Grumble = Backbone.View.extend({
     'click .cancel': 'render',
     'click .submit': 'updateGrumble',
     'click .delete': 'deleteGrumble',
-    'click .commentForm button': 'createComment'
+    'click .comment-submit': 'createComment',
+    'click .deleteComment': 'deleteComment'
   },
 
   initialize: function() {
     this.listenTo(this.model, 'change', this.render);
-
+    this.listenTo(this.model.comments, 'add', this.renderComment)
     this.template = Handlebars.compile($("#grumbleTemplate").html());
     this.editTemplate = Handlebars.compile($("#grumbleFormTemplate").html());
 
@@ -51,12 +52,13 @@ App.Views.Grumble = Backbone.View.extend({
  },
  createComment: function(){
      event.preventDefault();
+     console.log("clicked!");
      var commentData = {
          authorName: this.$("[name='authorName']").val(),
-         content: this.$("[name='authorName']").val()
+         content: this.$("[name='content']").val()
      }
      this.model.comments.create(commentData);
-     this.renderComment();
+//     this.renderComment();
  }
 
 });
