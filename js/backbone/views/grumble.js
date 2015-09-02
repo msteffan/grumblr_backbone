@@ -1,7 +1,6 @@
 App.Views.Grumble = Backbone.View.extend({
   className: 'grumble',
   tagName: 'div',
-
   events: {
     'click .edit': 'renderEditForm',
     'click .cancel': 'render',
